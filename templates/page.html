@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-template">
+    <div class="container">
+        <article class="page-content">
+            <header class="page-header">
+                <h1>{{ page.title }}</h1>
+                
+                {% if page.date %}
+                <time class="page-date">{{ page.date | date(format="%B %d, %Y") }}</time>
+                {% endif %}
+                
+                {% if page.extra.authors %}
+                <div class="page-authors">
+                    <strong>Authors:</strong>
+                    {% for author in page.extra.authors %}
+                        {{ author }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% if page.extra.venue %}
+                <div class="page-venue">
+                    <strong>Published in:</strong> {{ page.extra.venue }}
+                </div>
+                {% endif %}
+                
+                {% if page.extra.links %}
+                <div class="page-links">
+                    {% for link in page.extra.links %}
+                    <a href="{{ link.url }}" class="page-link" target="_blank">
+                        {% if link.icon %}<i class="{{ link.icon }}"></i>{% endif %}
+                        {{ link.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </header>
+            
+            <div class="page-body">
+                {{ page.content | safe }}
+            </div>
+            
+            {% if page.extra.citation %}
+            <div class="citation-box">
+                <h3>Citation</h3>
+                <pre class="citation-text">{{ page.extra.citation }}</pre>
+                <button onclick="copyCitation()" class="copy-citation-btn">Copy Citation</button>
+            </div>
+            {% endif %}
+        </article>
+    </div>
+</div>
+
+<style>
+.page-template {
+    padding: 4rem 0;
+}
+
+.page-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.page-date {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.page-authors, .page-venue {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.page-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.page-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background-color: darken(#2962ff, 10%);
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+}
+
+.page-body {
+    line-height: 1.7;
+    color: var(--text-color);
+}
+
+.page-body h2,
+.page-body h3,
+.page-body h4 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.page-body p {
+    margin-bottom: 1.5rem;
+}
+
+.page-body ul,
+.page-body ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.page-body li {
+    margin-bottom: 0.5rem;
+}
+
+.page-body blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--secondary-color);
+}
+
+.page-body pre {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.page-body code {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+.page-body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.citation-box {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+}
+
+.citation-box h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.citation-text {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-bottom: 1rem;
+}
+
+.copy-citation-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.copy-citation-btn:hover {
+    background-color: darken(#2962ff, 10%);
+}
+</style>
+
+<script>
+function copyCitation() {
+    const citationText = document.querySelector('.citation-text').textContent;
+    navigator.clipboard.writeText(citationText).then(function() {
+        const btn = document.querySelector('.copy-citation-btn');
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function() {
+            btn.textContent = originalText;
+        }, 2000);
+    });
+}
+</script>
+{% endblock content %} 

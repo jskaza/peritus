@@ -1,0 +1,24 @@
+[[social]]
+name = "Email"
+url = ""
+icon = "fas fa-envelope"
+
+[[social]]
+name = "X"
+url = ""
+icon = "fa-brands fa-x-twitter"
+
+[[social]]
+name = "Google Scholar"
+url = ""
+icon = "ai ai-google-scholar"
+
+[[social]]
+name = "GitHub"
+url = ""
+icon = "fab fa-github"
+
+[[social]]
+name = "LinkedIn"
+url = ""
+icon = "fab fa-linkedin" 

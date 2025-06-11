@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section-template">
+    <div class="container">
+        <div class="section-header">
+            <h1>{{ section.title }}</h1>
+            {% if section.description %}
+            <p>{{ section.description }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="section-content">
+            {% if section.content %}
+                {{ section.content | safe }}
+            {% endif %}
+            
+            {% set conferences = load_data(path="data/conferences.toml") %}
+            
+            <div class="conferences-list">
+                {% for conf in conferences.conference | sort(attribute="year") | reverse %}
+                <article class="conference-item">
+                    <header class="conference-header">
+                        <h3 class="conference-title">
+                            {{ conf.title }}
+                        </h3>
+                        
+                        <div class="conference-meta">
+                            <span class="conference-date">{{ conf.year}}</span>
+                            {% if conf.venue %}
+                                <span class="conference-venue">{{ conf.venue }}</span>
+                            {% endif %}
+                            {% if conf.location %}
+                                <span class="conference-location">{{ conf.location }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        {% if conf.author %}
+                        <div class="conference-authors">
+                            {% for author in conf.author %}
+                                {% if config.extra.last_name_identifier and config.extra.last_name_identifier in author %}
+                                    <span class="author highlighted-author">{{ author }}</span>{% if not loop.last %}, {% endif %}
+                                {% else %}
+                                    <span class="author">{{ author }}</span>{% if not loop.last %}, {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        {% if conf.description %}
+                        <div class="conference-description">
+                            {{ conf.description }}
+                        </div>
+                        {% endif %}
+                    </header>
+                    
+                    {% if conf.abstract %}
+                    <div class="conference-abstract">
+                        <details>
+                            <summary>Abstract</summary>
+                            <p>{{ conf.abstract }}</p>
+                        </details>
+                    </div>
+                    {% endif %}
+                    
+                    {% if conf.links %}
+                    <footer class="conference-footer">
+                        {% for link in conf.links %}
+                            {% if link.name == "Slides" or link.name == "Poster" %}
+                            <a href="{{ link.url }}" class="conference-link" target="_blank">{{ link.name }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </footer>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.conferences-list {
+    max-width: var(--content-width);
+    margin: 2rem auto;
+}
+
+.conference-item {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.conference-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+}
+
+.conference-header {
+    margin-bottom: 1rem;
+}
+
+.conference-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+.conference-title a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.conference-title a:hover {
+    text-decoration: underline;
+}
+
+.conference-meta {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.conference-date {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.conference-venue {
+    font-style: italic;
+    color: var(--text-color);
+}
+
+.conference-location {
+    color: var(--text-color);
+}
+
+.conference-authors {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.author {
+    font-weight: 500;
+}
+
+.highlighted-author {
+    color: #FEBC11;
+    font-weight: 600;
+}
+
+.conference-description {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.conference-abstract details {
+    margin-top: 1rem;
+}
+
+.conference-abstract summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+}
+
+.conference-abstract summary:hover {
+    color: var(--primary-color);
+}
+
+.conference-abstract p {
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem 0;
+    line-height: 1.6;
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.conference-footer {
+    margin-top: 1rem;
+}
+
+.conference-link {
+    padding: 0.5rem 1rem;
+    background-color: var(--border-color);
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 1rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.conference-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .conference-item {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .conference-title {
+        font-size: 1.1rem;
+    }
+}
+</style>
+{% endblock content %} 

@@ -1,0 +1,332 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section-template">
+    <div class="container">
+        <div class="section-header">
+            <h1>{{ section.title }}</h1>
+            {% if section.description %}
+            <p>{{ section.description }}</p>
+            {% endif %}
+        </div>
+        
+        {% set experience_data = load_data(path="data/experience.toml") %}
+        
+        <div class="section-content">
+            {% if section.content %}
+                {{ section.content | safe }}
+            {% endif %}
+            
+            <div class="experience-timeline">
+                {% for exp in experience_data.experience | sort(attribute="start_date") | reverse %}
+                <article class="experience-item">
+                    <div class="experience-timeline-marker">
+                        <div class="timeline-dot"></div>
+                        {% if not loop.last %}
+                        <div class="timeline-line"></div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="experience-content">
+                        <header class="experience-header">
+                            <h3 class="experience-title">{{ exp.title }}</h3>
+                            <div class="experience-company">
+                                {{ exp.company }}
+                                {% if exp.location %}
+                                    <span class="experience-location">• {{ exp.location }}</span>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="experience-meta">
+                                <span class="experience-dates">
+                                    {{ exp.start_date }} - 
+                                    {% if exp.end_date %}
+                                        {{ exp.end_date }}
+                                    {% else %}
+                                        Present
+                                    {% endif %}
+                                </span>     
+                            </div>
+                        </header>
+                        
+                        {% if exp.description %}
+                        <div class="experience-description">
+                            <p>{{ exp.description }}</p>
+                        </div>
+                        {% endif %}
+                        
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.experience-metadata {
+    max-width: 800px;
+    margin: 1rem auto 2rem auto;
+    padding: 1rem;
+    background: var(--secondary-background, #f8f9fa);
+    border-left: 4px solid var(--primary-color, #007bff);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.metadata-info {
+    margin: 0;
+    color: var(--text-secondary, #6c757d);
+}
+
+.metadata-label {
+    font-weight: 600;
+    color: var(--text-color, #212529);
+}
+
+.metadata-separator {
+    margin: 0 0.5rem;
+    color: var(--text-secondary, #6c757d);
+}
+
+.experience-timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.experience-item {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.experience-timeline-marker {
+    position: relative;
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    border: 3px solid var(--background-color);
+    box-shadow: 0 0 0 3px var(--primary-color);
+    z-index: 2;
+}
+
+.timeline-line {
+    width: 2px;
+    flex: 1;
+    min-height: 100px;
+    background-color: var(--border-color);
+    margin-top: 1rem;
+}
+
+.experience-content {
+    flex: 1;
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.experience-content:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+}
+
+.experience-header {
+    margin-bottom: 1.5rem;
+}
+
+.experience-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.experience-company {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.experience-company a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.experience-company a:hover {
+    text-decoration: underline;
+}
+
+.experience-location {
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+.experience-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.experience-dates {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.experience-type {
+    background-color: var(--border-color);
+    color: var(--text-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.experience-description {
+    margin-bottom: 1.5rem;
+}
+
+.experience-description p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.experience-responsibilities,
+.experience-achievements,
+.experience-url {
+    margin-bottom: 1.5rem;
+}
+
+.experience-responsibilities h4,
+.experience-achievements h4,
+.experience-technologies h4,
+.experience-url h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: inline;
+}
+
+.experience-responsibilities ul,
+.experience-achievements ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.experience-responsibilities li,
+.experience-achievements li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.experience-url p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.experience-url a {
+    color: var(--primary-color);
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.experience-url a:hover {
+    text-decoration: underline;
+}
+
+.experience-technologies {
+    margin-bottom: 0;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tag {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .experience-item {
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
+    
+    .experience-timeline-marker {
+        flex-direction: row;
+        margin-right: 0;
+        margin-bottom: 1rem;
+        align-items: flex-start;
+    }
+    
+    .timeline-line {
+        display: none;
+    }
+    
+    .experience-content {
+        padding: 1.5rem;
+    }
+    
+    .experience-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .tech-tags {
+        gap: 0.25rem;
+    }
+    
+    .tech-tag {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-content {
+        padding: 1rem;
+    }
+    
+    .experience-title {
+        font-size: 1.2rem;
+    }
+    
+    .experience-company {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock content %} 

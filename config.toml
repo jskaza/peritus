@@ -1,0 +1,82 @@
+# The URL the site will be built for
+base_url = "https://markscout.xyz"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# The site title and description; they are used in feeds by default.
+title = "Mark S"
+description = "Professional Portfolio"
+
+[extra]
+# Put all your custom variables here
+
+# Personal information
+name = "Mark S"
+role = "Macrodata Refiner"
+organization = "Lumon Industries"
+location = "Kier, PE"
+email = "markscout@lumon.com"
+last_name_identifier = "Scout"
+# Bio/about section
+bio = """
+Hi, I’m Mark Scout. By day—or at least, what feels like day—I work as a Macrodata Refinement department head at Lumon Industries. I’ve undergone the severance procedure, which means my work self and personal self are completely separate. I can’t tell you much about what I do outside the office, because I don’t know. What I do know is that I take pride in leading my team and hitting quota, even if I don’t fully understand what our data means. People say I’m dependable, maybe a little reserved, but I try to keep things running smoothly. Lately, though, I’ve started asking questions—about the work, the rules, and what it really means to be “me.”.
+"""
+interests = [
+  "Macrodata Refinement",
+  "Team Leadership",
+  "Philosophy of Identity",
+  "Corporate Ethics",
+  "The Goats (don’t ask)"
+]
+[[extra.menu]]
+name = "Publications"
+url = "/publications/"
+weight = 1
+
+[[extra.menu]]
+name = "Conferences & Talks"
+url = "/conferences/"
+weight = 2
+
+[[extra.menu]]
+name = "Experience"
+url = "/experience/"
+weight = 3
+
+
+
+
+
+
+# Features to enable
+enable_dark_mode = true
+enable_search = false
+
+# Color theme configuration
+[extra.colors]
+# Light mode colors
+primary_color = "#003660"      # UCSB Navy
+secondary_color = "#FEBC11"    # UCSB Gold  
+accent_color = "#09847A"       # UCSB Sea Green
+text_color = "#3D4952"         # UCSB Dark Gray
+background_color = "#ffffff"    # White
+card_background = "#ffffff"     # White
+border_color = "#DCE1E5"       # UCSB Light Gray
+light_background = "#EEF0F2"   # UCSB Light Light Gray
+
+# Dark mode colors
+dark_text_color = "#DCE1E5"        # UCSB Light Gray for dark mode text
+dark_background_color = "#111517"   # UCSB Light Gray Darken 80
+dark_card_background = "#1e1e1e"
+dark_border_color = "#333333"
+
+# Example: To use a different color scheme, uncomment and modify:
+# primary_color = "#2E3440"        # Nord Polar Night
+# secondary_color = "#5E81AC"      # Nord Frost  
+# accent_color = "#88C0D0"         # Nord Frost Light
+# text_color = "#3B4252"           # Nord Dark Gray
+# background_color = "#ECEFF4"     # Nord Snow Storm
+# card_background = "#E5E9F0"      # Nord Snow Storm Light
+# border_color = "#D8DEE9"         # Nord Snow Storm Medium
+# light_background = "#ECEFF4"     # Nord Snow Storm
