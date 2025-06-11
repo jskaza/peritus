@@ -1,32 +1,20 @@
-// Academic CV Theme Styles - UCSB Color Theme
-// Variables based on UC Santa Barbara Brand Guidelines
+// Academic CV Theme Styles
+// Color variables are now dynamically set from config.toml via template
 :root {
-  --primary-color: #003660;     // UCSB Navy
-  --secondary-color: #FEBC11;   // UCSB Gold
-  --accent-color: #09847A;      // UCSB Sea Green
-  --text-color: #3D4952;        // UCSB Dark Gray for text
-  --background-color: #ffffff;   // White
-  --card-background: #ffffff;    // White
-  --border-color: #DCE1E5;      // UCSB Light Gray
-  --light-background: #EEF0F2;  // UCSB Light Light Gray
-  --shadow: 0 2px 10px rgba(0, 54, 96, 0.1);
-  --hover-shadow: 0 4px 20px rgba(0, 54, 96, 0.15);
+  // Colors are injected from config.toml in base.html template
+  // Static variables that don't change based on config
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   --heading-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --max-width: 1200px;
   --content-width: 800px;
 }
 
-// Dark mode variables - UCSB themed
+// Dark mode shadow adjustments
 .dark-mode {
-  --text-color: #DCE1E5;         // UCSB Light Gray for dark mode text
-  --background-color: #111517;    // UCSB Light Gray Darken 80
-  --card-background: #1e1e1e;
-  --border-color: #333333;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   --hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --secondary-color: #FEBC11;     // Keep UCSB Gold for secondary in dark mode
-  --accent-color: #09847A;       // Keep UCSB Sea Green
 }
 
 // Reset and base styles
@@ -570,7 +558,7 @@ a {
 .footer {
   background-color: var(--card-background);
   border-top: 1px solid var(--border-color);
-  padding: 2rem 0;
+  padding: 1rem 0;
   margin-top: auto;
 }
 

@@ -11,6 +11,41 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
     
+    <!-- Dynamic color configuration from config.toml -->
+    {% if config.extra.colors %}
+    <style>
+        :root {
+            --primary-color: {{ config.extra.colors.primary_color | default(value="#39444C") }};
+            --secondary-color: {{ config.extra.colors.secondary_color | default(value="#C8102E") }};
+            --accent-color: {{ config.extra.colors.accent_color | default(value="#98A6AD") }};
+            --text-color: {{ config.extra.colors.text_color | default(value="#2C2F33") }};
+            --background-color: {{ config.extra.colors.background_color | default(value="#F8F9FA") }};
+            --card-background: {{ config.extra.colors.card_background | default(value="#FFFFFF") }};
+            --border-color: {{ config.extra.colors.border_color | default(value="#D0D3D4") }};
+            --light-background: {{ config.extra.colors.light_background | default(value="#EDF0F2") }};
+        }
+        
+        .dark-mode {
+            --text-color: {{ config.extra.colors.dark_text_color | default(value="#E0E0E0") }};
+            --background-color: {{ config.extra.colors.dark_background_color | default(value="#121212") }};
+            --card-background: {{ config.extra.colors.dark_card_background | default(value="#1E1E1E") }};
+            --border-color: {{ config.extra.colors.dark_border_color | default(value="#2C2C2C") }};
+        }
+        
+        /* Footer link styling */
+        .footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+    </style>
+    {% endif %}
+    
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
@@ -76,8 +111,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.name | default(value=config.title) }}. 
-               Built with <a href="https://www.getzola.org/">Zola</a>.</p>
+            <p style="font-size: 0.8em;">&copy; {{ now() | date(format="%Y") }} {{ config.extra.name | default(value=config.title) }}. <br> Built with <a href="https://www.getzola.org/">Zola</a> using the <a href="https://github.com/jskaza/peritus"><strong>peritus</strong></a> theme by <a href="https://jskaza.github.io/">Jonathan Skaza</a>.</p>
         </div>
     </footer>
 

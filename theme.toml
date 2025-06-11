@@ -1,0 +1,26 @@
+name = "peritus"
+description = "A beautiful theme for academic/professional portfolio sites"
+# An optional tags to allow quick search
+tags = ["cv", "academic", "professional", "portfolio", "research", "bio", "publications", "education", "experience", "resume", "peritus"]
+license = "MIT"
+homepage = "https://github.com/jskaza/peritus"
+# The minimum version of Zola required
+min_version = "0.4.0"
+# An optional live demo URL
+demo = "https://jskaza.github.io/"
+
+# Any variable there can be overridden in the end user `config.toml`
+# You don't need to prefix variables by the theme name but as this will
+# be merged with user data, some kind of prefix or nesting is preferable
+# Use snake_casing to be consistent with the rest of Zola
+[extra]
+
+# The theme author info: you!
+[author]
+name = "Jonathan Skaza"
+homepage = "https://jskaza.github.io/"
+
+# If this is porting a theme from another static site engine, provide
+# the info of the original author here
+[original]
+repo = "https://github.com/HugoBlox/theme-academic-cv"

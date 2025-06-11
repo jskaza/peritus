@@ -31,18 +31,14 @@
                                 <span class="conference-venue">{{ conf.venue }}</span>
                             {% endif %}
                             {% if conf.location %}
-                                <span class="conference-location">{{ conf.location }}</span>
+                                <br><span class="conference-location">{{ conf.location }}</span>
                             {% endif %}
                         </div>
                         
                         {% if conf.author %}
                         <div class="conference-authors">
                             {% for author in conf.author %}
-                                {% if config.extra.last_name_identifier and config.extra.last_name_identifier in author %}
-                                    <span class="author highlighted-author">{{ author }}</span>{% if not loop.last %}, {% endif %}
-                                {% else %}
-                                    <span class="author">{{ author }}</span>{% if not loop.last %}, {% endif %}
-                                {% endif %}
+                                <span class="author">{{ author }}</span>{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </div>
                         {% endif %}

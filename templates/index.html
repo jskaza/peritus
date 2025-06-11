@@ -4,6 +4,7 @@
 {# Load data from separate TOML files #}
 {% set education_data = load_data(path="data/education.toml") %}
 {% set social_data = load_data(path="data/social.toml") %}
+{% set interests_data = load_data(path="data/interests.toml") %}
 <div class="hero-section">
     <div class="container">
         <div class="hero-content">
@@ -29,7 +30,7 @@
                 
                 <!-- Download CV button -->
                 <div class="cv-download">
-                    <a href="{{ get_url(path="cv/cv.pdf") }}" class="btn btn-primary" target="_blank">
+                    <a href="{{ config.extra.cv_url }}" class="btn btn-primary" target="_blank">
                         <i class="fas fa-download"></i> Download CV
                     </a>
                 </div>
@@ -51,11 +52,11 @@
                     <div class="info-content">
                         <div class="info-grid">
                             <!-- Interests -->
-                            {% if config.extra.interests %}
+                            {% if interests_data.interests %}
                             <div class="info-box">
                                 <h3>Interests</h3>
                                 <ul class="interests-list">
-                                    {% for interest in config.extra.interests %}
+                                    {% for interest in interests_data.interests %}
                                     <li>{{ interest }}</li>
                                     {% endfor %}
                                 </ul>

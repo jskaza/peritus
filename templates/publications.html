@@ -36,12 +36,8 @@
                         </div>
                         
                         <div class="publication-authors">
-                            {% for author in pub.author %}
-                                {% if config.extra.last_name_identifier and config.extra.last_name_identifier in author %}
-                                    <span class="author highlighted-author">{{ author }}</span>{% if not loop.last %}, {% endif %}
-                                {% else %}
-                                    <span class="author">{{ author }}</span>{% if not loop.last %}, {% endif %}
-                                {% endif %}
+                            {% for author in pub.author %}         
+                                <span class="author">{{ author }}</span>{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </div>
                     </header>
