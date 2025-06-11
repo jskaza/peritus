@@ -5,9 +5,9 @@
 
 ![Theme Preview](peritus-theme-preview.webp)
 
-🚀 Check out a [live demo](https://jskaza.github.io/) to see the theme in action.
-
 A clean, modular [Zola](https://www.getzola.org/) theme for academic CVs and research portfolios. Inspired by the popular [Hugo Academic CV theme](https://github.com/HugoBlox/theme-academic-cv), it is perfect for researchers, academics, educators, and students who want to showcase their work, publications, and achievements.
+
+🚀 Check out a [live demo](https://jskaza.github.io/) to see the theme in action.
 
 ## 🌟 Features
 
