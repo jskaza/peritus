@@ -3,7 +3,7 @@
 [![Zola](https://img.shields.io/badge/Zola-Compatible-blue)](https://www.getzola.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![Theme Preview]([peritus-theme-preview.png](https://raw.githubusercontent.com/jskaza/peritus/refs/heads/main/peritus-theme-preview.png)
+![Theme Preview](https://raw.githubusercontent.com/jskaza/peritus/refs/heads/main/peritus-theme-preview.png)
 
 A clean, modular [Zola](https://www.getzola.org/) theme for academic CVs and research portfolios. Inspired by the popular [Hugo Academic CV theme](https://github.com/HugoBlox/theme-academic-cv), it is perfect for researchers, academics, educators, and students who want to showcase their work, publications, and achievements.
 
